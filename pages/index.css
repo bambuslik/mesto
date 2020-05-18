@@ -1,0 +1,6 @@
+/*vendors*/
+@import url('../vendor/normalize/normalize.css');
+
+/*blocks*/
+@import url('../blocks/root/root.css');
+@import url('../blocks/body/body.css');
