@@ -1,0 +1,7 @@
+.header__main-page-link {
+  transition: .3s opacity ease-out;
+}
+
+.header__main-page-link:hover {
+  opacity: .6;
+}
