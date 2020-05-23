@@ -1,3 +1,6 @@
+@import url('__main-page-link/header__main-page-link.css');
+@import url('__logo/header__logo.css');
+
 .header {
   height: 74px;
   border-bottom: 1px solid #545454;
