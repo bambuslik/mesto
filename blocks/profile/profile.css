@@ -2,6 +2,7 @@
 @import url('__info/profile__info.css');
 @import url('__title/profile__title.css');
 @import url('__edit-btn/profile__edit-btn.css');
+@import url('__edit-btn-bg/profile__edit-btn-bg.css');
 @import url('__subtitle/profile__subtitle.css');
 @import url('__add-btn/profile__add-btn.css');
 
@@ -9,4 +10,12 @@
   padding-top: 40px;
   display: flex;
   align-items: center;
+}
+
+@media screen and (max-width: 768px){
+  .profile {
+    flex-direction: column;
+    padding-left: 19px;
+    padding-right: 19px;
+  }
 }
