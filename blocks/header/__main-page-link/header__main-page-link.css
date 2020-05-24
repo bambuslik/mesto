@@ -1,7 +1,15 @@
 .header__main-page-link {
+  width: 142px;
+  display: inline-block;
   transition: .3s opacity ease-out;
 }
 
 .header__main-page-link:hover {
   opacity: .6;
+}
+
+@media screen and (max-width: 768px) {
+  .header__main-page-link {
+    width: 104px;
+  }
 }
