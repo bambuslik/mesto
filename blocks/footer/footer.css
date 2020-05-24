@@ -3,3 +3,12 @@
   font-size: 18px;
   padding-top: 66px;
 }
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding-left: 19px;
+    padding-right: 19px;
+    padding-top: 48px;
+    font-size: 14px;
+  }
+}
