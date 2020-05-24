@@ -1,0 +1,13 @@
+.form__close-btn {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  transform: rotate(45deg);
+  transition: .3s opacity ease-out;
+}
+
+.form__close-btn:hover {
+  opacity: .6;
+}

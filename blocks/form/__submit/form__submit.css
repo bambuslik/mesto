@@ -1,0 +1,14 @@
+.form__submit {
+  background-color: #000;
+  height: 50px;
+  color: #FFF;
+  font-size: 18px;
+  border: none;
+  margin-top: 48px;
+  transition: .3s background-color ease-out;
+}
+
+.form__submit:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
