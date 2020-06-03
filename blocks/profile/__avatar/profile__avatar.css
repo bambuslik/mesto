@@ -2,7 +2,8 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: url('../../../images/avatar.jpg') no-repeat center;
   background-size: contain;
   flex-shrink: 0;
+  background-repeat: no-repeat;
+  background-position: center;
 }
