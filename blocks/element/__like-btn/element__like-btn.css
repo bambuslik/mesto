@@ -5,6 +5,7 @@
   border: none;
   cursor: pointer;
   transition: .3s opacity ease;
+  outline: none;
 }
 
 .element__like-btn:hover {
