@@ -90,6 +90,12 @@ function placeCards(cardsArray) {
     cardClone.querySelector('.element__title').textContent = cards[i].name;
     cardClone.querySelector('.element__img').src = cards[i].imgLink;
     cardClone.querySelector('.element__img').alt = cards[i].imgAlt;
+
+    //не красиво внутри перебора вешать обработчик, но по-другому не понял как повесить, чтобы он видел карточку из template --\
+    cardClone.querySelector('.element__like-btn').addEventListener('click', (event) => {
+      event.target.classList.toggle('element__like-btn_status_active');
+    });
+
     cardsList.prepend(cardClone);
   });
 }
@@ -121,3 +127,5 @@ editProfileSubmitBtn.addEventListener('click', saveProfile);
 addCardPopupOpenBtn.addEventListener('click', addCardPopupShow);
 addCardPopupCloseBtn.addEventListener('click', addCardPopupHide);
 addCardSubmitBtn.addEventListener('click', addCard);
+
+
