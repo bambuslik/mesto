@@ -25,7 +25,9 @@
       <button class="profile__add-btn"></button>
     </section>
 
-    <ul class="elements">
+    <ul class="elements" id="cards-list">
+
+      <!--
       <li class="elements__item element">
         <img src="images/murino.jpg" alt="Муринские дома-панельки" class="element__img">
         <div class="element__info">
@@ -62,12 +64,24 @@
         </div>
       </li>
       <li class="elements__item element">
-        <img src="images/shushari.jpg" alt="Вид на здание НИИ в Шушарах" class="element__img">
+        <img src="https://raw.githubusercontent.com/bambuslik/mesto/master/images/murino.jpg" alt="Вид на здание НИИ в Шушарах" class="element__img">
         <div class="element__info">
           <h2 class="element__title">Шушары</h2>
           <button class="element__like-btn"></button>
         </div>
       </li>
+      -->
+
+      <template id="card-template">
+        <li class="elements__item element">
+          <img src="" alt="" class="element__img">
+          <div class="element__info">
+            <h2 class="element__title"></h2>
+            <button class="element__like-btn"></button>
+          </div>
+        </li>
+      </template>
+
     </ul>
   </main>
   <footer class="footer">
