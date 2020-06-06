@@ -1,12 +1,24 @@
-//let, const definitions
-const editProfile = document.querySelector('.profile__edit-btn');
-let popup = document.querySelector('.popup');
+//LET, CONST DEFINITIONS
+//edit profile --\
+const editProfilePopupOpenBtn = document.querySelector('#profile-edit-btn');
+const editProfilePopup = document.querySelector('#profile-popup');
 let profileName = document.querySelector('.profile__title');
 let profileJob = document.querySelector('.profile__subtitle');
-let formName = document.querySelector('.form__name');
-let formJob = document.querySelector('.form__job');
-const closeBtn = document.querySelector('.form__close-btn');
-const submitBtn = document.querySelector('.form__submit');
+let formName = document.querySelector('#profile-name');
+let formJob = document.querySelector('#profile-job');
+const editProfilePopupCloseBtn = document.querySelector('#profile-popup .form__close-btn');
+const editProfileSubmitBtn = document.querySelector('#profile-popup .form__submit');
+//edit profile --/
+
+//add card --\
+const addCardPopupOpenBtn = document.querySelector('#add-card-btn');
+const addCardPopup = document.querySelector('#location-card-popup');
+const addCardSubmitBtn = document.querySelector('#location-card-popup .form__submit');
+const formCardTitle = document.querySelector('#location-card-title');
+const formCardImg = document.querySelector('#location-card-img-link');
+const addCardPopupCloseBtn = document.querySelector('#location-card-popup .form__close-btn');
+//add card --/
+
 const initialCards = [
   {
     name: 'Шушары',
@@ -42,42 +54,70 @@ const initialCards = [
 const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('#cards-list');
 
-//func definitions
-function openPopup(event) {
+//FUNC DEFINITIONS
+function editProfilePopupShow(event) {
   event.preventDefault();
-  popup.classList.add('popup_opened');
+  editProfilePopup.classList.add('popup_status_show');
   formName.value = profileName.textContent;
   formJob.value = profileJob.textContent;
 }
 
-function closePopup(event) {
+function addCardPopupShow(event) {
   event.preventDefault();
-  popup.classList.remove('popup_opened');
+  addCardPopup.classList.add('popup_status_show');
+}
+
+function editProfilePopupHide(event) {
+  event.preventDefault();
+  editProfilePopup.classList.remove('popup_status_show');
+}
+
+function addCardPopupHide(event) {
+  event.preventDefault();
+  addCardPopup.classList.remove('popup_status_show');
 }
 
 function saveProfile(event) {
   event.preventDefault();
   profileName.textContent = formName.value;
   profileJob.textContent = formJob.value;
-  popup.classList.remove('popup_opened');
+  editProfilePopup.classList.remove('popup_status_show');
 }
 
-function addCard(name, imgLink, imgAlt) {
-  //TODO check if empty
-  const cardClone = cardTemplate.cloneNode(true);
-  cardClone.querySelector('.element__title').textContent = name;
-  cardClone.querySelector('.element__img').src = imgLink;
-  cardClone.querySelector('.element__img').alt = imgAlt;
-  cardsList.append(cardClone);
+function placeCards(cardsArray) {
+  cardsArray.forEach(function (card, i, cards) {
+    const cardClone = cardTemplate.cloneNode(true);
+    cardClone.querySelector('.element__title').textContent = cards[i].name;
+    cardClone.querySelector('.element__img').src = cards[i].imgLink;
+    cardClone.querySelector('.element__img').alt = cards[i].imgAlt;
+    cardsList.prepend(cardClone);
+  });
 }
 
-//hook events listeners
-editProfile.addEventListener('click', openPopup);
-closeBtn.addEventListener('click', closePopup);
-submitBtn.addEventListener('click', saveProfile)
+function addCard(event) {
+  event.preventDefault();
+  const cardToAdd = [
+    {
+      name: formCardTitle.value,
+      imgLink: formCardImg.value,
+      imgAlt: 'Извините, но эту красоту невозможно описать словами'
+    }
+  ];
+  placeCards(cardToAdd);
+  addCardPopup.classList.remove('popup_status_show');
+  formCardTitle.value = '';
+  formCardImg.value = '';
+}
 
-//functions call
+//FUNC CALL
 //init cards
-initialCards.forEach(function (card, i, cards) {
-  addCard(cards[i].name,cards[i].imgLink,cards[i].imgAlt);
-});
+placeCards(initialCards);
+
+//HOOK EVENT LISTENERS
+editProfilePopupOpenBtn.addEventListener('click', editProfilePopupShow);
+editProfilePopupCloseBtn.addEventListener('click', editProfilePopupHide);
+editProfileSubmitBtn.addEventListener('click', saveProfile);
+
+addCardPopupOpenBtn.addEventListener('click', addCardPopupShow);
+addCardPopupCloseBtn.addEventListener('click', addCardPopupHide);
+addCardSubmitBtn.addEventListener('click', addCard);
