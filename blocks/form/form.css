@@ -1,13 +1,11 @@
 @import url('__title/form__title.css');
 @import url('__input-text/form__input-text.css');
 @import url('__submit/form__submit.css');
-@import url('__close-btn/form__close-btn.css');
 
 .form {
   display: flex;
   flex-direction: column;
   padding: 36px;
-  position: relative;
 }
 
 @media screen and (max-width: 470px) {
