@@ -2,10 +2,10 @@
 //edit profile --\
 const editProfilePopupOpenBtn = document.querySelector('#profile-edit-btn');
 const editProfilePopup = document.querySelector('#profile-popup');
-let profileName = document.querySelector('.profile__title');
-let profileJob = document.querySelector('.profile__subtitle');
-let formName = document.querySelector('#profile-name');
-let formJob = document.querySelector('#profile-job');
+const profileName = document.querySelector('.profile__title');
+const profileJob = document.querySelector('.profile__subtitle');
+const formName = document.querySelector('#profile-name');
+const formJob = document.querySelector('#profile-job');
 const editProfileSubmitBtn = document.querySelector('#profile-popup .form__submit');
 //edit profile --/
 
