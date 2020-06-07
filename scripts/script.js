@@ -56,27 +56,39 @@ const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('#cards-list');
 
 //FUNC DEFINITIONS
-function editProfilePopupShow(event) {
-  event.preventDefault();
-  editProfilePopup.classList.add('popup_status_show');
+function editProfilePopupShow() {
+  editProfilePopup.classList.add('popup_opacity');
+  editProfilePopup.classList.add('popup_visibility');
   formName.value = profileName.textContent;
   formJob.value = profileJob.textContent;
 }
 
-function addCardPopupShow(event) {
-  event.preventDefault();
-  addCardPopup.classList.add('popup_status_show');
+function addCardPopupShow() {
+  addCardPopup.classList.add('popup_opacity');
+  addCardPopup.classList.add('popup_visibility');
+}
+
+function showFullImg(event) {
+  document.querySelector('.popup__img').src = event.target.src;
+  document.querySelector('.popup__img-title').textContent = event.target.parentElement.parentElement.parentElement.querySelector('.element__title').textContent
+  fullImgPopup.classList.add('popup_opacity');
+  fullImgPopup.classList.add('popup_visibility');
 }
 
 function popupHide(event) {
-  event.target.parentElement.parentElement.classList.remove('popup_status_show')
+  function clearVisibility() {
+    event.target.closest('.popup').classList.remove('popup_visibility');
+  }
+
+  event.target.closest('.popup').classList.remove('popup_opacity');
+  window.setTimeout(clearVisibility, 300);
 }
 
 function saveProfile(event) {
   event.preventDefault();
   profileName.textContent = formName.value;
   profileJob.textContent = formJob.value;
-  editProfilePopup.classList.remove('popup_status_show');
+  popupHide(event);
 }
 
 function placeCards(cardsArray) {
@@ -111,15 +123,9 @@ function addCard(event) {
     }
   ];
   placeCards(cardToAdd);
-  addCardPopup.classList.remove('popup_status_show');
+  popupHide(event);
   formCardTitle.value = '';
   formCardImg.value = '';
-}
-
-function showFullImg(event) {
-  document.querySelector('.popup__img').src = event.target.src;
-  document.querySelector('.popup__img-title').textContent = event.target.parentElement.parentElement.parentElement.querySelector('.element__title').textContent
-  fullImgPopup.classList.add('popup_status_show');
 }
 
 //FUNC CALL
