@@ -92,9 +92,12 @@ function placeCards(cardsArray) {
     cardClone.querySelector('.element__img').alt = cards[i].imgAlt;
 
     //не красиво внутри перебора вешать обработчик, но по-другому не понял как повесить, чтобы он видел карточку из template --\
-    cardClone.querySelector('.element__like-btn').addEventListener('click', (event) => {
+    cardClone.querySelector('.element__like-btn').addEventListener('click', event => {
       event.target.classList.toggle('element__like-btn_status_active');
     });
+    cardClone.querySelector('.element__trash').addEventListener('click', event => {
+      event.target.parentElement.parentElement.remove()
+    })
 
     cardsList.prepend(cardClone);
   });
