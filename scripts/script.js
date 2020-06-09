@@ -1,24 +1,24 @@
 //LET, CONST DEFINITIONS
 //edit profile --\
-const editProfilePopupOpenBtn = document.querySelector('#profile-edit-btn');
-const editProfilePopup = document.querySelector('#profile-popup');
+const editProfilePopupOpenBtn = document.querySelector('.profile__edit-btn');
+const editProfilePopup = document.querySelector('.popup_type_profile');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
-const formName = document.querySelector('#profile-name');
-const formJob = document.querySelector('#profile-job');
-const editProfileSubmitBtn = document.querySelector('#profile-popup .form__submit');
+const formName = document.querySelector('.input-profile-name');
+const formJob = document.querySelector('.input-profile-job');
+const editProfileSubmitBtn = document.querySelector('.popup_type_profile .form__submit');
 //edit profile --/
 
 //add card --\
-const addCardPopupOpenBtn = document.querySelector('#add-card-btn');
-const addCardPopup = document.querySelector('#location-card-popup');
-const addCardSubmitBtn = document.querySelector('#location-card-popup .form__submit');
-const formCardTitle = document.querySelector('#location-card-title');
-const formCardImg = document.querySelector('#location-card-img-link');
+const addCardPopupOpenBtn = document.querySelector('.profile__add-btn');
+const addCardPopup = document.querySelector('.popup_type_card');
+const addCardSubmitBtn = document.querySelector('.popup_type_card .form__submit');
+const formCardTitle = document.querySelector('.input-card-title');
+const formCardImg = document.querySelector('.input-card-img');
 //add card --/
 
 const popupCloseBtns = document.querySelectorAll('.popup__close-btn');
-const fullImgPopup = document.querySelector('#full-img-popup');
+const fullImgPopup = document.querySelector('.popup_type_img');
 
 const initialCards = [
   {
@@ -52,8 +52,8 @@ const initialCards = [
     imgAlt: 'Муринские дома-панельки'
   }
 ];
-const cardTemplate = document.querySelector('#card-template').content;
-const cardsList = document.querySelector('#cards-list');
+const cardTemplate = document.querySelector('.card-template').content;
+const cardsList = document.querySelector('.elements');
 
 //FUNC DEFINITIONS
 function editProfilePopupShow() {
