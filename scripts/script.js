@@ -24,31 +24,23 @@ const cardsList = document.querySelector('.elements');
 
 //FUNC DEFINITIONS
 function editProfilePopupShow() {
-  editProfilePopup.classList.add('popup_opacity');
-  editProfilePopup.classList.add('popup_visibility');
+  editProfilePopup.classList.add('popup_show');
   formName.value = profileName.textContent;
   formJob.value = profileJob.textContent;
 }
 
 function addCardPopupShow() {
-  addCardPopup.classList.add('popup_opacity');
-  addCardPopup.classList.add('popup_visibility');
+  addCardPopup.classList.add('popup_show');
 }
 
 function showFullImg(event) {
   document.querySelector('.popup__img').src = event.target.src;
   document.querySelector('.popup__img-title').textContent = event.target.parentElement.parentElement.parentElement.querySelector('.element__title').textContent
-  fullImgPopup.classList.add('popup_opacity');
-  fullImgPopup.classList.add('popup_visibility');
+  fullImgPopup.classList.add('popup_show');
 }
 
 function popupHide(event) {
-  function clearVisibility() {
-    event.target.closest('.popup').classList.remove('popup_visibility');
-  }
-
-  event.target.closest('.popup').classList.remove('popup_opacity');
-  window.setTimeout(clearVisibility, 300);
+  event.target.closest('.popup').classList.remove('popup_show');
 }
 
 function saveProfile(event) {
@@ -58,16 +50,20 @@ function saveProfile(event) {
   popupHide(event);
 }
 
+function cardLike() {
+  event.target.classList.toggle('element__like-btn_status_active');
+}
+
 function placeCards(cardsArray) {
   cardsArray.forEach(function (card, i, cards) {
     const cardClone = cardTemplate.cloneNode(true);
-    cardClone.querySelector('.element__title').textContent = cards[i].name;
+    cardClone.querySelector('.element__title').textContent = card.name;
     cardClone.querySelector('.element__img').src = cards[i].imgLink;
     cardClone.querySelector('.element__img').alt = cards[i].imgAlt;
 
     //не красиво внутри перебора вешать обработчик, но по-другому не понял как повесить, чтобы он видел карточку из template --\
     cardClone.querySelector('.element__like-btn').addEventListener('click', event => {
-      event.target.classList.toggle('element__like-btn_status_active');
+      cardLike(event);
     });
     cardClone.querySelector('.element__trash').addEventListener('click', event => {
       event.target.parentElement.parentElement.remove()
@@ -95,6 +91,11 @@ function addCard(event) {
   formCardImg.value = '';
 }
 
+// function openPopup(popupName) {
+//
+//
+// }
+
 //FUNC CALL
 //init cards
 placeCards(initialCards);
@@ -102,6 +103,14 @@ placeCards(initialCards);
 
 //HOOK EVENT LISTENERS
 editProfilePopupOpenBtn.addEventListener('click', editProfilePopupShow);
+// editProfilePopupOpenBtn.addEventListener('click', function (event) {
+//   openPopup('popup_type_profile');
+//   console.log(
+// event.target
+// );
+// });
+
+
 editProfileSubmitBtn.addEventListener('click', saveProfile);
 
 addCardPopupOpenBtn.addEventListener('click', addCardPopupShow);
