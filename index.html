@@ -26,20 +26,6 @@
     </section>
 
     <ul class="elements">
-      <template class="card-template">
-        <li class="elements__item element">
-          <div class="element__img-container">
-            <div class="element__img-container-ratio">
-              <img src="" alt="" class="element__img">
-            </div>
-            <button class="element__trash"></button>
-          </div>
-          <div class="element__info">
-            <h2 class="element__title"></h2>
-            <button class="element__like-btn"></button>
-          </div>
-        </li>
-      </template>
     </ul>
   </main>
   <footer class="footer">
@@ -48,7 +34,7 @@
 
   <div class="popup popup_type_profile">
     <div class="popup__container popup__container_type_form">
-      <form action="" class="form">
+      <form action="" name="form-profile" class="form form_type_profile">
         <h2 class="form__title">Редактировать профиль</h2>
         <input type="text" name="name" class="form__input-text input-profile-name">
         <input type="text" name="job" class="form__input-text input-profile-job">
@@ -60,7 +46,7 @@
 
   <div class="popup popup_type_card">
     <div class="popup__container popup__container_type_form">
-      <form action="" class="form">
+      <form action="" name="form-card" class="form form_type_card">
         <h2 class="form__title">Новое место</h2>
         <input type="text" placeholder="Название" name="title" class="form__input-text input-card-title">
         <input type="text" placeholder="Ссылка на картинку" name="img-link" class="form__input-text input-card-img">
@@ -79,6 +65,21 @@
       <p class="popup__img-title"></p>
     </div>
   </div>
+
+  <template class="card-template">
+    <li class="elements__item element">
+      <div class="element__img-container">
+        <div class="element__img-container-ratio">
+          <img src="" alt="" class="element__img">
+        </div>
+        <button class="element__trash"></button>
+      </div>
+      <div class="element__info">
+        <h2 class="element__title"></h2>
+        <button class="element__like-btn"></button>
+      </div>
+    </li>
+  </template>
 
 </div>
 <script src="scripts/cards.js"></script>
