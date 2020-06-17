@@ -34,10 +34,16 @@
 
   <div class="popup popup_type_profile">
     <div class="popup__container popup__container_type_form">
-      <form action="" name="form-profile" class="form form_type_profile">
+      <form action="" name="form-profile" class="form form_type_profile" novalidate>
         <h2 class="form__title">Редактировать профиль</h2>
-        <input type="text" name="name" class="form__input-text input-profile-name">
-        <input type="text" name="job" class="form__input-text input-profile-job">
+        <label class="form__field">
+          <input type="text" name="name" class="form__input-text input-profile-name" required minlength="2" maxlength="40" autocomplete="off">
+          <span class="form__input-error"></span>
+        </label>
+        <label class="form__field">
+          <input type="text" name="job" class="form__input-text input-profile-job" required minlength="2" maxlength="200" autocomplete="off">
+          <span class="form__input-error"></span>
+        </label>
         <input type="submit" class="form__submit" value="Сохранить">
       </form>
       <button class="popup__close-btn"></button>
@@ -48,8 +54,14 @@
     <div class="popup__container popup__container_type_form">
       <form action="" name="form-card" class="form form_type_card">
         <h2 class="form__title">Новое место</h2>
-        <input type="text" placeholder="Название" name="title" class="form__input-text input-card-title">
-        <input type="text" placeholder="Ссылка на картинку" name="img-link" class="form__input-text input-card-img">
+        <label class="form__field">
+          <input type="text" placeholder="Название" name="title" class="form__input-text input-card-title" required minlength="1" maxlength="30" autocomplete="off">
+          <span class="form__input-error"></span>
+        </label>
+        <label class="form__field">
+          <input type="url" placeholder="Ссылка на картинку" name="img-link" class="form__input-text input-card-img" required autocomplete="off">
+          <span class="form__input-error"></span>
+        </label>
         <input type="submit" class="form__submit" value="Сохранить">
       </form>
       <button class="popup__close-btn"></button>
@@ -84,5 +96,6 @@
 </div>
 <script src="scripts/cards.js"></script>
 <script src="scripts/script.js"></script>
+<script src="scripts/validate.js"></script>
 </body>
 </html>

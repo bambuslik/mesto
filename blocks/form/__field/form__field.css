@@ -1,0 +1,4 @@
+.form__field {
+  /*border: 1px solid red;*/
+  min-height: 64px;
+}

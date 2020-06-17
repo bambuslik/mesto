@@ -25,11 +25,19 @@ const cardsList = document.querySelector('.elements');
 //FUNC DEFINITIONS
 function popupHide() {
   document.querySelector('.popup_show').classList.remove('popup_show');
+
 }
 
 function popupHideOverlay(event) {
   //check if click on overlay
   if (event.target.classList.contains('popup')) {
+    popupHide();
+  }
+}
+
+function popupHideEsc(event) {
+  if (event.keyCode === 27) {
+    document.removeEventListener('keydown', popupHideEsc);
     popupHide();
   }
 }
@@ -57,20 +65,15 @@ function openPopup(popupName) {
   }
 
   //close popup by ESC
-  document.addEventListener('keydown', (event) => {
-    if (event.keyCode === 27) {
-      popupHide();
-    }
-  });
+  document.addEventListener('keydown', popupHideEsc);
 
 }
-
 
 function saveProfile(event) {
   event.preventDefault();
   profileName.textContent = formName.value;
   profileJob.textContent = formJob.value;
-  popupHide(event);
+  popupHide();
 }
 
 function cardLike() {
@@ -109,11 +112,10 @@ function addCard(event) {
     }
   ];
   placeCards(cardToAdd);
-  popupHide(event);
+  popupHide();
   formCardTitle.value = '';
   formCardImg.value = '';
 }
-
 
 //FUNC CALL
 //init cards
@@ -132,7 +134,6 @@ formCard.addEventListener('submit', addCard);
 
 popupCloseBtns.forEach(function (popupCloseBtn) {
   popupCloseBtn.addEventListener('click', function () {
-    popupHide(event);
+    popupHide();
   });
 });
-
