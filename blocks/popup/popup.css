@@ -17,5 +17,4 @@
   opacity: 0;
   visibility: hidden;
   transition: .3s opacity ease, .3s visibility ease;
-  border: 1px solid red;
 }
