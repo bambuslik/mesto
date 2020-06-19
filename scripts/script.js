@@ -1,7 +1,6 @@
 //LET, CONST DEFINITIONS
 //edit profile --\
 const editProfilePopupOpenBtn = document.querySelector('.profile__edit-btn');
-const editProfilePopup = document.querySelector('.popup_type_profile');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const formName = document.querySelector('.input-profile-name');
@@ -11,21 +10,22 @@ const formProfile = document.querySelector('.form_type_profile');
 
 //add card --\
 const addCardPopupOpenBtn = document.querySelector('.profile__add-btn');
-const addCardPopup = document.querySelector('.popup_type_card');
 const formCard = document.querySelector('.form_type_card');
 const formCardTitle = document.querySelector('.input-card-title');
 const formCardImg = document.querySelector('.input-card-img');
 //add card --/
 
+const popupElements = document.querySelectorAll('.popup');
 const popupCloseBtns = document.querySelectorAll('.popup__close-btn');
-const fullImgPopup = document.querySelector('.popup_type_img');
 const cardTemplate = document.querySelector('.card-template').content;
 const cardsList = document.querySelector('.elements');
 
 //FUNC DEFINITIONS
 function popupHide() {
-  document.querySelector('.popup_show').classList.remove('popup_show');
-
+  const popupElement = document.querySelector('.popup_show');
+  const formElement = popupElement.querySelector('.form');
+  popupElement.classList.remove('popup_show');
+  resetForm(formElement);
 }
 
 function popupHideOverlay(event) {
@@ -42,31 +42,11 @@ function popupHideEsc(event) {
   }
 }
 
-function openPopup(popupName) {
-  switch (popupName) {
-    case 'profile':
-      editProfilePopup.classList.add('popup_show');
-      formName.value = profileName.textContent;
-      formJob.value = profileJob.textContent;
-      editProfilePopup.addEventListener('click', popupHideOverlay);
-      break;
-
-    case 'card':
-      addCardPopup.classList.add('popup_show');
-      addCardPopup.addEventListener('click', popupHideOverlay);
-      break;
-
-    case 'img':
-      document.querySelector('.popup__img').src = event.target.src;
-      document.querySelector('.popup__img-title').textContent = event.target.closest('.element').querySelector('.element__title').textContent;
-      fullImgPopup.classList.add('popup_show');
-      fullImgPopup.addEventListener('click', popupHideOverlay);
-      break;
-  }
+function openPopup(popupClass) {
+  document.querySelector(popupClass).classList.add('popup_show');
 
   //close popup by ESC
   document.addEventListener('keydown', popupHideEsc);
-
 }
 
 function saveProfile(event) {
@@ -80,6 +60,7 @@ function cardLike() {
   event.target.classList.toggle('element__like-btn_status_active');
 }
 
+//имел ввиду "to place Cards" - разместить карточки
 function placeCards(cardsArray) {
   cardsArray.forEach(function (card, i, cards) {
     const cardClone = cardTemplate.cloneNode(true);
@@ -95,7 +76,9 @@ function placeCards(cardsArray) {
       event.target.parentElement.parentElement.remove()
     });
     cardClone.querySelector('.element__img').addEventListener('click', function () {
-      openPopup('img');
+      document.querySelector('.popup__img').src = event.target.src;
+      document.querySelector('.popup__img-title').textContent = event.target.closest('.element').querySelector('.element__title').textContent;
+      openPopup('.popup_type_img');
     });
 
     cardsList.prepend(cardClone);
@@ -123,10 +106,12 @@ placeCards(initialCards);
 
 //HOOK EVENT LISTENERS
 editProfilePopupOpenBtn.addEventListener('click', () => {
-  openPopup('profile');
+  formName.value = profileName.textContent;
+  formJob.value = profileJob.textContent;
+  openPopup('.popup_type_profile');
 });
 addCardPopupOpenBtn.addEventListener('click', () => {
-  openPopup('card');
+  openPopup('.popup_type_card');
 });
 
 formProfile.addEventListener('submit', saveProfile);
@@ -136,4 +121,8 @@ popupCloseBtns.forEach(function (popupCloseBtn) {
   popupCloseBtn.addEventListener('click', function () {
     popupHide();
   });
+});
+
+popupElements.forEach((element) => {
+  element.addEventListener('click', popupHideOverlay);
 });

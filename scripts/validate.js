@@ -1,5 +1,9 @@
 //LET, CONST DEFINITIONS
 const formList = Array.from(document.querySelectorAll('.form'));
+const inputErrorClass = 'form__input-text_type_error';
+const errorClass = 'form__input-error_type_visible';
+const inactiveButtonClass = 'form__submit_disabled';
+const submitButtonSelector = '.form__submit';
 
 //FUNC DEFINITIONS
 function inputList(formElement) {
@@ -12,14 +16,22 @@ function hasInvalidInput(formElement) {
   });
 }
 
-function submitBtnState(formElement, submitButtonSelector, inactiveButtonClass) {
+function setSubmitDisabled(submitButtonElement, inactiveButtonClass) {
+  submitButtonElement.classList.add(inactiveButtonClass);
+  submitButtonElement.setAttribute('disabled', 'disabled');
+}
+
+function setSubmitEnabled(submitButtonElement, inactiveButtonClass) {
+  submitButtonElement.classList.remove(inactiveButtonClass);
+  submitButtonElement.removeAttribute('disabled');
+}
+
+function setSubmitState(formElement, submitButtonSelector, inactiveButtonClass) {
   const submitButtonElement = formElement.querySelector(submitButtonSelector);
   if (hasInvalidInput(formElement)) {
-    submitButtonElement.classList.add(inactiveButtonClass);
-    submitButtonElement.setAttribute('disabled', 'disabled');
+    setSubmitDisabled(submitButtonElement, inactiveButtonClass);
   } else {
-    submitButtonElement.classList.remove(inactiveButtonClass);
-    submitButtonElement.removeAttribute('disabled');
+    setSubmitEnabled(submitButtonElement, inactiveButtonClass);
   }
 }
 
@@ -35,7 +47,7 @@ function hideInputError(inputSelector, inputErrorClass, errorClass) {
   inputSelector.closest('.form__field').querySelector('.form__input-error').classList.remove(errorClass);
 }
 
-function isValid(inputSelector, inputErrorClass, errorClass) {
+function checkInputValidity(inputSelector, inputErrorClass, errorClass) {
   if (!inputSelector.validity.valid) {
     showInputError(inputSelector, inputErrorClass, errorClass);
   } else {
@@ -44,24 +56,35 @@ function isValid(inputSelector, inputErrorClass, errorClass) {
 }
 
 function enableValidation(options) {
-  isValid(options.inputElement, options.inputErrorClass, options.errorClass);
-  submitBtnState(options.formElement, options.submitButtonSelector, options.inactiveButtonClass);
+  checkInputValidity(options.inputElement, options.inputErrorClass, options.errorClass);
+  setSubmitState(options.formElement, options.submitButtonSelector, options.inactiveButtonClass);
 }
 
 function setEventListeners(formElement, inputList) {
-  submitBtnState(formElement, '.form__submit', 'form__submit_disabled');
+  setSubmitState(formElement, '.form__submit', 'form__submit_disabled');
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', (event) => {
       enableValidation({
         formElement: formElement,
         inputElement: inputElement,
-        submitButtonSelector: '.form__submit',
-        inactiveButtonClass: 'form__submit_disabled',
-        inputErrorClass: 'form__input-text_type_error',
-        errorClass: 'form__input-error_type_visible'
+        submitButtonSelector: submitButtonSelector,
+        inactiveButtonClass: inactiveButtonClass,
+        inputErrorClass: inputErrorClass,
+        errorClass: errorClass
       });
     });
   });
+}
+
+function resetForm(formElement) {
+  if (formElement) {
+    formElement.reset();
+    const errorInputElements = Array.from(formElement.querySelectorAll('.form__input-text_type_error'));
+    errorInputElements.forEach((element) => {
+      hideInputError(element, inputErrorClass, errorClass)
+    });
+    setSubmitDisabled(formElement.querySelector(submitButtonSelector), inactiveButtonClass);
+  }
 }
 
 //FUNC CALL
