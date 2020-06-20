@@ -60,6 +60,10 @@ function cardLike(event) {
   event.target.classList.toggle('element__like-btn_status_active');
 }
 
+function createCard() {
+
+}
+
 //я так и не понял почему placeCards это плохое имя для функции, дословный перевод "разместить карточки"
 // >>А для этого стоит добавить глагол - place это и есть глагол
 function placeCards(cardsArray) {
