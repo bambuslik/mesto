@@ -1,6 +1,6 @@
 //LET, CONST DEFINITIONS
 //edit profile --\
-const editProfilePopupOpenBtn = document.querySelector('.profile__edit-btn');
+const editProfilePopupOpenButton = document.querySelector('.profile__edit-btn');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const formName = document.querySelector('.input-profile-name');
@@ -9,14 +9,14 @@ const formProfile = document.querySelector('.form_type_profile');
 //edit profile --/
 
 //add card --\
-const addCardPopupOpenBtn = document.querySelector('.profile__add-btn');
+const addCardPopupOpenButton = document.querySelector('.profile__add-btn');
 const formCard = document.querySelector('.form_type_card');
 const formCardTitle = document.querySelector('.input-card-title');
 const formCardImg = document.querySelector('.input-card-img');
 //add card --/
 
 const popupElements = document.querySelectorAll('.popup');
-const popupCloseBtns = document.querySelectorAll('.popup__close-btn');
+const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
 const cardTemplate = document.querySelector('.card-template').content;
 const cardsList = document.querySelector('.elements');
 
@@ -105,20 +105,20 @@ function addCard(event) {
 placeCards(initialCards);
 
 //HOOK EVENT LISTENERS
-editProfilePopupOpenBtn.addEventListener('click', () => {
+editProfilePopupOpenButton.addEventListener('click', () => {
   formName.value = profileName.textContent;
   formJob.value = profileJob.textContent;
   openPopup('.popup_type_profile');
 });
-addCardPopupOpenBtn.addEventListener('click', () => {
+addCardPopupOpenButton.addEventListener('click', () => {
   openPopup('.popup_type_card');
 });
 
 formProfile.addEventListener('submit', saveProfile);
 formCard.addEventListener('submit', addCard);
 
-popupCloseBtns.forEach(function (popupCloseBtn) {
-  popupCloseBtn.addEventListener('click', function () {
+popupCloseButtons.forEach(function (popupCloseButton) {
+  popupCloseButton.addEventListener('click', function () {
     popupHide();
   });
 });
