@@ -56,7 +56,7 @@ function saveProfile(event) {
   popupHide();
 }
 
-function cardLike() {
+function cardLike(event) {
   event.target.classList.toggle('element__like-btn_status_active');
 }
 
