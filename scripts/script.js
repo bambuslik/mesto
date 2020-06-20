@@ -60,7 +60,8 @@ function cardLike(event) {
   event.target.classList.toggle('element__like-btn_status_active');
 }
 
-//имел ввиду "to place Cards" - разместить карточки
+//я так и не понял почему placeCards это плохое имя для функции, дословный перевод "разместить карточки"
+// >>А для этого стоит добавить глагол - place это и есть глагол
 function placeCards(cardsArray) {
   cardsArray.forEach(function (card, i, cards) {
     const cardClone = cardTemplate.cloneNode(true);
@@ -73,7 +74,7 @@ function placeCards(cardsArray) {
       cardLike(event);
     });
     cardClone.querySelector('.element__trash').addEventListener('click', event => {
-      event.target.parentElement.parentElement.remove()
+      event.target.closest('.element').remove();
     });
     cardClone.querySelector('.element__img').addEventListener('click', function () {
       document.querySelector('.popup__img').src = event.target.src;
