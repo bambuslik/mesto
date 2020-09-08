@@ -1,12 +1,10 @@
 export class Card {
-  constructor(cardTitle, cardImgLink, cardImgAlt, cardElementSelector) {
+  constructor(cardTitle, cardImgLink, cardImgAlt, cardElementSelector, {openPopup}) {
     this._cardTitle = cardTitle;
     this._cardImgLink = cardImgLink;
     this._cardImgAlt = cardImgAlt;
     this._cardElementSelector = cardElementSelector;
-    this._popupHideEscShim = (event) => {
-      this._popupHideEsc(event);
-    }
+    this._openPopup = openPopup;
   }
 
   _getTemplate() {
@@ -23,19 +21,10 @@ export class Card {
     event.target.closest('.element').remove();
   }
 
-  _popupHideEsc(event) {
-    if (event.keyCode === 27) {
-      document.removeEventListener('keydown', this._popupHideEscShim);
-      const popupElement = document.querySelector('.popup_show');
-      popupElement.classList.remove('popup_show');
-    }
-  }
-
   _handleCardPopupInit(event) {
     document.querySelector('.popup__img').src = event.target.src;
     document.querySelector('.popup__img-title').textContent = event.target.closest('.element').querySelector('.element__title').textContent;
-    document.querySelector('.popup_type_img').classList.add('popup_show');
-    document.addEventListener('keydown', this._popupHideEscShim);
+    this._openPopup();
   }
 
   _setEventListeners() {

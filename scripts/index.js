@@ -51,6 +51,11 @@ const formCard = document.querySelector('.form_type_card');
 const formCardTitle = document.querySelector('.input-card-title');
 const formCardImg = document.querySelector('.input-card-img');
 const formCardImgAlt = 'Извините, но эту красоту невозможно описать словами';
+const cardOpenPopupSettings = {
+  openPopup: () => {
+    openPopup('.popup_type_img');
+  }
+};
 //add card --/
 
 const popupElements = document.querySelectorAll('.popup');
@@ -60,8 +65,9 @@ const cardsList = document.querySelector('.elements');
 //FUNC DEFINITIONS
 function popupHide() {
   const popupElement = document.querySelector('.popup_show');
-  const formElement = popupElement.querySelector('.form');
+  // const formElement = popupElement.querySelector('.form');
   popupElement.classList.remove('popup_show');
+  document.removeEventListener('keydown', popupHideEsc);
 }
 
 function popupHideOverlay(event) {
@@ -72,7 +78,6 @@ function popupHideOverlay(event) {
 
 function popupHideEsc(event) {
   if (event.keyCode === 27) {
-    document.removeEventListener('keydown', popupHideEsc);
     popupHide();
   }
 }
@@ -95,14 +100,26 @@ function addCard(cartToAdd) {
 
 function initCards(initCards) {
   initCards.forEach(card => {
-    const cartToAdd = new Card(card.name, card.imgLink, card.imgAlt, '.card-template');
+    const cartToAdd = new Card(
+      card.name,
+      card.imgLink,
+      card.imgAlt,
+      '.card-template',
+      cardOpenPopupSettings
+    );
     addCard(cartToAdd.generateCard());
   });
 }
 
 function submitAddCardForm(event) {
   event.preventDefault();
-  const cartToAdd = new Card(formCardTitle.value, formCardImg.value, formCardImgAlt, '.card-template')
+  const cartToAdd = new Card(
+    formCardTitle.value,
+    formCardImg.value,
+    formCardImgAlt,
+    '.card-template',
+    cardOpenPopupSettings
+  )
   addCard(cartToAdd.generateCard());
   popupHide();
   formCardTitle.value = '';
