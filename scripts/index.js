@@ -51,8 +51,10 @@ const formCard = document.querySelector('.form_type_card');
 const formCardTitle = document.querySelector('.input-card-title');
 const formCardImg = document.querySelector('.input-card-img');
 const formCardImgAlt = 'Извините, но эту красоту невозможно описать словами';
-const cardOpenPopupSettings = {
-  openPopup: () => {
+const cardPopupSettings = {
+  openPopup: (event) => {
+    document.querySelector('.popup__img').src = event.target.src;
+    document.querySelector('.popup__img-title').textContent = event.target.closest('.element').querySelector('.element__title').textContent;
     openPopup('.popup_type_img');
   }
 };
@@ -105,7 +107,7 @@ function initCards(initCards) {
       card.imgLink,
       card.imgAlt,
       '.card-template',
-      cardOpenPopupSettings
+      cardPopupSettings
     );
     addCard(cartToAdd.generateCard());
   });
@@ -118,7 +120,7 @@ function submitAddCardForm(event) {
     formCardImg.value,
     formCardImgAlt,
     '.card-template',
-    cardOpenPopupSettings
+    cardPopupSettings
   )
   addCard(cartToAdd.generateCard());
   popupHide();

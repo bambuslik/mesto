@@ -21,12 +21,6 @@ export class Card {
     event.target.closest('.element').remove();
   }
 
-  _handleCardPopupInit(event) {
-    document.querySelector('.popup__img').src = event.target.src;
-    document.querySelector('.popup__img-title').textContent = event.target.closest('.element').querySelector('.element__title').textContent;
-    this._openPopup();
-  }
-
   _setEventListeners() {
     this._cardElement.querySelector('.element__like-btn').addEventListener('click', (event) => {
       this._handleCardLike(event);
@@ -37,7 +31,7 @@ export class Card {
     })
 
     this._cardElement.querySelector('.element__img').addEventListener('click', event => {
-      this._handleCardPopupInit(event);
+      this._openPopup(event);
     });
   }
 
