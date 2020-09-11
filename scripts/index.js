@@ -1,6 +1,7 @@
 //IMPORT
 import {Card} from './Card.js';
 import {FormValidator} from "./FormValidator.js";
+import Section from "./Section.js";
 
 //LET, CONST DEFINITIONS
 const initialCards = [
@@ -62,7 +63,7 @@ const cardPopupSettings = {
 
 const popupElements = document.querySelectorAll('.popup');
 const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
-const cardsList = document.querySelector('.elements');
+const listElement = '.elements';
 
 //FUNC DEFINITIONS
 function popupHide() {
@@ -96,40 +97,40 @@ function saveProfile(event) {
   popupHide();
 }
 
-function addCard(cartToAdd) {
-  cardsList.prepend(cartToAdd);
-}
+// function addCard(cartToAdd) {
+//   cardsList.prepend(cartToAdd);
+// }
 
-function initCards(initCards) {
-  initCards.forEach(card => {
-    const cartToAdd = new Card(
-      card.name,
-      card.imgLink,
-      card.imgAlt,
-      '.card-template',
-      cardPopupSettings
-    );
-    addCard(cartToAdd.generateCard());
-  });
-}
+// function initCards(initCards) {
+//   initCards.forEach(card => {
+//     const cartToAdd = new Card(
+//       card.name,
+//       card.imgLink,
+//       card.imgAlt,
+//       '.card-template',
+//       cardPopupSettings
+//     );
+//     addCard(cartToAdd.generateCard());
+//   });
+// }
 
-function submitAddCardForm(event) {
-  event.preventDefault();
-  const cartToAdd = new Card(
-    formCardTitle.value,
-    formCardImg.value,
-    formCardImgAlt,
-    '.card-template',
-    cardPopupSettings
-  )
-  addCard(cartToAdd.generateCard());
-  popupHide();
-  formCardTitle.value = '';
-  formCardImg.value = '';
-}
+// function submitAddCardForm(event) {
+//   event.preventDefault();
+//   const cartToAdd = new Card(
+//     formCardTitle.value,
+//     formCardImg.value,
+//     formCardImgAlt,
+//     '.card-template',
+//     cardPopupSettings
+//   )
+//   addCard(cartToAdd.generateCard());
+//   popupHide();
+//   formCardTitle.value = '';
+//   formCardImg.value = '';
+// }
 
 //FUNC CALL
-initCards(initialCards);
+// initCards(initialCards);
 
 //HOOK EVENT LISTENERS
 editProfilePopupOpenButton.addEventListener('click', () => {
@@ -145,7 +146,7 @@ addCardPopupOpenButton.addEventListener('click', () => {
 });
 
 formProfile.addEventListener('submit', saveProfile);
-formCard.addEventListener('submit', submitAddCardForm);
+// formCard.addEventListener('submit', submitAddCardForm);
 
 popupCloseButtons.forEach(function (popupCloseButton) {
   popupCloseButton.addEventListener('click', function () {
@@ -171,3 +172,24 @@ formProfileValidator.enableValidation();
 
 const formNewCardValidator = new FormValidator(validatorConfig, formCard);
 formNewCardValidator.enableValidation();
+
+
+//WORK 8
+const cardsList = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(
+        item.name,
+        item.imgLink,
+        item.imgAlt,
+        '.card-template',
+        cardPopupSettings
+      );
+      cardsList.addItem(card.generateCard());
+    }
+  },
+  listElement
+);
+
+cardsList.renderItems();
