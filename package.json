@@ -1,0 +1,30 @@
+{
+  "name": "work_08",
+  "version": "1.0.0",
+  "description": "yandex praktikum work 08",
+  "main": "index.js",
+  "scripts": {
+    "b": "webpack --env.MODE=build --mode production",
+    "d": "webpack --env.MODE=dev --mode development",
+    "s": "webpack-dev-server --env.MODE=dev --mode development"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/polyfill": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^4.3.0",
+    "file-loader": "^6.1.0",
+    "html-webpack-plugin": "^4.4.1",
+    "mini-css-extract-plugin": "^0.11.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^4.2.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
