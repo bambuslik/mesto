@@ -6,4 +6,5 @@
   flex-shrink: 0;
   background-repeat: no-repeat;
   background-position: center;
+  overflow: hidden;
 }
