@@ -47,6 +47,17 @@ const formProfile = document.querySelector('.form_type_profile');
 const addCardPopupOpenButton = document.querySelector('.profile__add-btn');
 const formCard = document.querySelector('.form_type_card');
 const listElement = '.elements';
+const newCard = (item) => {
+  return new Card(
+    item,
+    '.card-template',
+    {
+      handleCardClick: (data) => {
+        imagePopup.open(data);
+      }
+    }
+  );
+}
 //add card --/
 
 //VALIDATION
@@ -78,15 +89,7 @@ const cardsList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(
-          item,
-        '.card-template',
-        {
-          handleCardClick: (data) => {
-            imagePopup.open(data);
-          }
-        }
-      );
+      const card = newCard(item);
       cardsList.addItem(card.generateCard());
     }
   },
@@ -99,15 +102,7 @@ const addCardPopup = new PopupWithForm(
   '.popup_type_card',
   {
     submitCallback: (item) => {
-      const card = new Card(
-        item,
-        '.card-template',
-        {
-          handleCardClick: (data) => {
-            imagePopup.open(data);
-          }
-        }
-      );
+      const card = newCard(item);
       cardsList.addItem(card.generateCard());
       addCardPopup.close();
     }
