@@ -5,9 +5,11 @@ export default class PopupWithImage extends Popup {
     super(popupSelector);
   }
 
-  open(event) {
+  open(data) {
     super.open();
-    document.querySelector('.popup__img').src = event.target.src;
-    document.querySelector('.popup__img-title').textContent = event.target.closest('.element').querySelector('.element__title').textContent;
+    const popupImg = document.querySelector('.popup__img');
+    popupImg.src = data.src;
+    popupImg.alt = data.alt;
+    document.querySelector('.popup__img-title').textContent = data.title;
   }
 }

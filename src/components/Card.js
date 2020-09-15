@@ -1,10 +1,9 @@
 export class Card {
-  constructor(cardTitle, cardImgLink, cardImgAlt, cardElementSelector, {handleCardClick}) {
-    this._cardTitle = cardTitle;
-    this._cardImgLink = cardImgLink;
-    this._cardImgAlt = cardImgAlt;
+  constructor({title, imgLink}, cardElementSelector, {handleCardClick}) {
+    this._cardTitle = title;
+    this._cardImgLink = imgLink;
     this._cardElementSelector = cardElementSelector;
-     this._handleCardClick = handleCardClick;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -31,15 +30,20 @@ export class Card {
     })
 
     this._cardElement.querySelector('.element__img').addEventListener('click', event => {
-      this._handleCardClick(event);
+      const data = {};
+      data.src = event.target.src;
+      data.title = data.alt = event.target.closest('.element').querySelector('.element__title').textContent;
+      this._handleCardClick(data);
     });
   }
 
   generateCard() {
     this._cardElement = this._getTemplate();
-    this._cardElement.querySelector('.element__title').textContent = this._cardTitle;
-    this._cardElement.querySelector('.element__img').src = this._cardImgLink;
-    this._cardElement.querySelector('.element__img').alt = this._cardImgAlt;
+    const cardImg = this._cardElement.querySelector('.element__img');
+    const cardTitle = this._cardElement.querySelector('.element__title');
+    cardTitle.textContent = this._cardTitle;
+    cardImg.src = this._cardImgLink;
+    cardImg.alt = this._cardTitle;
     this._setEventListeners()
 
     return this._cardElement;

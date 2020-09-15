@@ -4,8 +4,8 @@
   "description": "yandex praktikum work 08",
   "main": "index.js",
   "scripts": {
-    "build": "rd /s /q dist && webpack",
-    "dev": "webpack-dev-server --watch"
+    "build": "rimraf ./dist/* && webpack",
+    "dev": "webpack-dev-server --watch --open"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +21,7 @@
     "html-webpack-plugin": "^4.4.1",
     "mini-css-extract-plugin": "^0.11.2",
     "postcss-loader": "^4.0.1",
+    "rimraf": "^3.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"

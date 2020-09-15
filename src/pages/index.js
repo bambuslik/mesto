@@ -1,44 +1,38 @@
-import './pages/index.css';
+import './index.css';
 
 //IMPORT
-import {Card} from './components/Card.js';
-import {FormValidator} from "./components/FormValidator.js";
-import Section from "./components/Section.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import PopupWithForm from "./components/PopupWithForm.js";
-import UserInfo from "./components/UserInfo.js";
+import {Card} from '../components/Card.js';
+import {FormValidator} from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 //LET, CONST DEFINITIONS
 const initialCards = [
   {
-    name: 'Шушары',
-    imgLink: 'http://webpunk.ru/images/shushari.jpg',
-    imgAlt: 'Вид на здание НИИ в Шушарах'
+    title: 'Шушары',
+    imgLink: 'http://webpunk.ru/images/shushari.jpg'
   },
   {
-    name: 'Севастополь',
-    imgLink: 'http://webpunk.ru/images/sevastopol.jpg',
-    imgAlt: 'Плавбасейн в бухте Севастополя'
+    title: 'Севастополь',
+    imgLink: 'http://webpunk.ru/images/sevastopol.jpg'
   },
   {
-    name: 'Санкт-Петербург',
-    imgLink: 'http://webpunk.ru/images/saint-pete.jpg',
-    imgAlt: 'Дворцы барокко зодчего Росси'
+    title: 'Санкт-Петербург',
+    imgLink: 'http://webpunk.ru/images/saint-pete.jpg'
   },
   {
-    name: 'Медео',
-    imgLink: 'http://webpunk.ru/images/medeo.jpg',
-    imgAlt: 'Стена стадиона в Медео'
+    title: 'Медео',
+    imgLink: 'http://webpunk.ru/images/medeo.jpg'
   },
   {
-    name: 'Алма-Ата',
-    imgLink: 'http://webpunk.ru/images/alma-ata.jpg',
-    imgAlt: 'Алма-Атинские дома близнецы'
+    title: 'Алма-Ата',
+    imgLink: 'http://webpunk.ru/images/alma-ata.jpg'
   },
   {
-    name: 'Мурино',
-    imgLink: 'http://webpunk.ru/images/murino.jpg',
-    imgAlt: 'Муринские дома-панельки'
+    title: 'Мурино',
+    imgLink: 'http://webpunk.ru/images/murino.jpg'
   }
 ];
 
@@ -52,7 +46,6 @@ const formProfile = document.querySelector('.form_type_profile');
 //add card --\
 const addCardPopupOpenButton = document.querySelector('.profile__add-btn');
 const formCard = document.querySelector('.form_type_card');
-const formCardImgAlt = 'Извините, но эту красоту невозможно описать словами';
 const listElement = '.elements';
 //add card --/
 
@@ -86,13 +79,11 @@ const cardsList = new Section(
     items: initialCards,
     renderer: (item) => {
       const card = new Card(
-        item.name,
-        item.imgLink,
-        item.imgAlt,
+          item,
         '.card-template',
         {
-          handleCardClick: (event) => {
-            imagePopup.open(event);
+          handleCardClick: (data) => {
+            imagePopup.open(data);
           }
         }
       );
@@ -108,35 +99,17 @@ const addCardPopup = new PopupWithForm(
   '.popup_type_card',
   {
     submitCallback: (item) => {
-      const cardItem = [
+      const card = new Card(
+        item,
+        '.card-template',
         {
-          name: item.title,
-          imgLink: item.imgLink
-        }
-      ];
-
-      const cardsList = new Section(
-        {
-          items: cardItem,
-          renderer: (item) => {
-            const card = new Card(
-              item.name,
-              item.imgLink,
-              item.imgAlt,
-              '.card-template',
-              {
-                handleCardClick: (event) => {
-                  imagePopup.open(event);
-                }
-              }
-            );
-            cardsList.addItem(card.generateCard());
-            addCardPopup.close();
+          handleCardClick: (data) => {
+            imagePopup.open(data);
           }
-        },
-        listElement
+        }
       );
-      cardsList.renderItems();
+      cardsList.addItem(card.generateCard());
+      addCardPopup.close();
     }
   }
 );
