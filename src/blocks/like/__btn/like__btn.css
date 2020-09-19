@@ -1,4 +1,4 @@
-.element__like-btn {
+.like__btn {
   width: 21px;
   height: 19px;
   flex-shrink: 0;
@@ -9,6 +9,6 @@
   outline: none;
 }
 
-.element__like-btn:hover {
+.like__btn:hover {
   opacity: .6;
 }

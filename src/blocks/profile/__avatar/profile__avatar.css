@@ -2,9 +2,24 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background-size: contain;
   flex-shrink: 0;
+  border: none;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
   overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+}
+
+.profile__avatar:hover:after {
+  content: '';
+  display: block;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8) url('../../../images/edit-profile-hover.svg') no-repeat center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }

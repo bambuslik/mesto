@@ -5,6 +5,7 @@ export class FormValidator {
     this._submitButtonSelector = validatorConfig.submitButtonSelector;
     this._inactiveButtonClass = validatorConfig.inactiveButtonClass;
     this._formElement = formElement;
+    this._submitButtonElement = this._formElement.querySelector(this._submitButtonSelector);
   }
 
   _getInputsList() {
@@ -29,22 +30,21 @@ export class FormValidator {
     });
   }
 
-  _setSubmitDisabled(submitButtonElement) {
-    submitButtonElement.classList.add(this._inactiveButtonClass);
-    submitButtonElement.setAttribute('disabled', 'disabled');
+  _setSubmitDisabled() {
+    this._submitButtonElement.classList.add(this._inactiveButtonClass);
+    this._submitButtonElement.setAttribute('disabled', 'disabled');
   }
 
-  _setSubmitEnabled(submitButtonElement) {
-    submitButtonElement.classList.remove(this._inactiveButtonClass);
-    submitButtonElement.removeAttribute('disabled');
+  _setSubmitEnabled() {
+    this._submitButtonElement.classList.remove(this._inactiveButtonClass);
+    this._submitButtonElement.removeAttribute('disabled');
   }
 
   _setSubmitState() {
-    const submitButtonElement = this._formElement.querySelector(this._submitButtonSelector);
     if (this._hasInvalidInput()) {
-      this._setSubmitDisabled(submitButtonElement);
+      this._setSubmitDisabled();
     } else {
-      this._setSubmitEnabled(submitButtonElement);
+      this._setSubmitEnabled();
     }
   }
 
@@ -65,13 +65,22 @@ export class FormValidator {
     });
   }
 
+  waitApiStart(message) {
+    this._setSubmitDisabled();
+    this._submitButtonElement.value = message;
+  }
+
+  waitApiFinish(message) {
+    this._setSubmitEnabled();
+    this._submitButtonElement.value = message;
+  }
+
   resetFormByCloseModal() {
     this._getInputsList().forEach((inputElement) => {
       inputElement.value = '';
       this._hideInputError(inputElement);
     });
-    const submitButtonElement = this._formElement.querySelector(this._submitButtonSelector);
-    this._setSubmitDisabled(submitButtonElement);
+    this._setSubmitDisabled();
   }
 
   enableValidation() {

@@ -15,13 +15,11 @@
   </header>
   <main>
     <section class="profile">
-      <div class="profile__avatar">
-        <img src="images/avatar.jpg" alt="Аватар" class="profile__avatar-img">
-      </div>
+      <button class="profile__avatar"></button>
       <div class="profile__info">
-        <h1 class="profile__title">Жак-Ив Кусто</h1>
+        <h1 class="profile__title"></h1>
         <button class="profile__edit-btn"></button>
-        <p class="profile__subtitle">Исследователь океана</p>
+        <p class="profile__subtitle"></p>
       </div>
       <button class="profile__add-btn"></button>
     </section>
@@ -51,19 +49,46 @@
     </div>
   </div>
 
+  <div class="popup popup_type_avatar">
+    <div class="popup__container popup__container_type_form">
+      <form action="" name="form-profile" class="form form_type_avatar" novalidate>
+        <h2 class="form__title">Обновить аватар</h2>
+
+        <label class="form__field">
+          <input type="url" placeholder="Ссылка на аватар" name="link" class="form__input-text input-avatar-img" required autocomplete="off">
+          <span class="form__input-error"></span>
+        </label>
+        <input type="submit" class="form__submit" value="Сохранить">
+
+
+      </form>
+      <button class="popup__close-btn"></button>
+    </div>
+  </div>
+
   <div class="popup popup_type_card">
     <div class="popup__container popup__container_type_form">
       <form action="" name="form-card" class="form form_type_card" novalidate>
         <h2 class="form__title">Новое место</h2>
         <label class="form__field">
-          <input type="text" placeholder="Название" name="title" class="form__input-text input-card-title" required minlength="1" maxlength="30" autocomplete="off">
+          <input type="text" placeholder="Название" name="name" class="form__input-text input-card-title" required minlength="1" maxlength="30" autocomplete="off">
           <span class="form__input-error"></span>
         </label>
         <label class="form__field">
-          <input type="url" placeholder="Ссылка на картинку" name="imgLink" class="form__input-text input-card-img" required autocomplete="off">
+          <input type="url" placeholder="Ссылка на картинку" name="link" class="form__input-text input-card-img" required autocomplete="off">
           <span class="form__input-error"></span>
         </label>
         <input type="submit" class="form__submit" value="Сохранить">
+      </form>
+      <button class="popup__close-btn"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_type_submit">
+    <div class="popup__container popup__container_type_form">
+      <form action="" name="form-profile" class="form form_type_profile" novalidate>
+        <h2 class="form__title">Вы уверены?</h2>
+        <input type="submit" class="form__submit" value="Да">
       </form>
       <button class="popup__close-btn"></button>
     </div>
@@ -85,11 +110,13 @@
         <div class="element__img-container-ratio">
           <img alt="" class="element__img">
         </div>
-        <button class="element__trash"></button>
       </div>
       <div class="element__info">
         <h2 class="element__title"></h2>
-        <button class="element__like-btn"></button>
+        <div class="element__like like">
+          <button class="like__btn"></button>
+          <span class="like__counter">0</span>
+        </div>
       </div>
     </li>
   </template>
