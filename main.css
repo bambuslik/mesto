@@ -5,7 +5,7 @@
 .header__main-page-link{width:142px;display:inline-block;transition:opacity .3s ease-out}.header__main-page-link:hover{opacity:.6}@media screen and (max-width:768px){.header__main-page-link{width:104px}}
 .header__logo{width:100%}
 .header{height:74px;border-bottom:1px solid #545454}@media screen and (max-width:768px){.header{height:56px;padding:0 26px}}
-.profile__avatar{width:120px;height:120px;border-radius:50%;flex-shrink:0;background-repeat:no-repeat;background-position:50%;background-size:cover;overflow:hidden}
+.profile__avatar{width:120px;height:120px;border-radius:50%;flex-shrink:0;border:none;background-repeat:no-repeat;background-position:50%;background-size:cover;overflow:hidden;cursor:pointer;outline:none;position:relative}.profile__avatar:hover:after{content:"";display:block;position:absolute;background:rgba(0,0,0,.8) url(./images/edit-profile-hover.svg) no-repeat 50%;top:0;right:0;bottom:0;left:0}
 .profile__avatar-img{width:100%}
 .profile__info{flex-grow:1;display:flex;align-items:baseline;flex-wrap:wrap;margin-left:30px;min-width:0;max-width:100%}@media screen and (max-width:768px){.profile__info{margin-left:0;justify-content:center;text-align:center}}
 .profile__title{font-size:42px;font-weight:500;line-height:56px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;max-width:calc(100% - 60px)}@media screen and (max-width:768px){.profile__title{font-size:27px;line-height:1.1;margin-top:28px}}
