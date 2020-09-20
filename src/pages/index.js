@@ -102,21 +102,6 @@ const cardsList = new Section(
   listElement
 );
 
-//get initial card from promises (api)
-function initialCards(userId) {
-  const initialCards = api.getInitialCards()
-    .then((cardsArray) => {
-      //render cards by Section method
-      cardsList.renderItems(cardsArray, userId);
-      return cardsArray;
-    })
-    .catch((err) => {
-      console.error(
-        err
-      );
-    });
-}
-
 //add card by user (popup)
 function addCardByUser(userId) {
   const addCardPopup = new PopupWithForm(
@@ -157,20 +142,18 @@ function addCardByUser(userId) {
   });
 }
 
-//get user info from promises (api)
-api.getUser()
-  .then((userInfo) => {
-    userNameElement.textContent = userInfo.name;
-    userJobElement.textContent = userInfo.about;
-    userAvatarElement.style.backgroundImage = `url(${userInfo.avatar})`;
-    //return user id to use it with cards init
-    return userInfo._id;
-  })
-  .then((userId) => {
-    //run initialCards when user is ready
-    initialCards(userId);
-    //add card by user (popup)
-    addCardByUser(userId);
+function setUser(userInfo) {
+  userNameElement.textContent = userInfo.name;
+  userJobElement.textContent = userInfo.about;
+  userAvatarElement.style.backgroundImage = `url(${userInfo.avatar})`;
+}
+
+Promise.all([api.getUser(), api.getInitialCards()])
+  .then(([userInfo, cardsArray]) => {
+    setUser(userInfo);
+    //render cards by Section method
+    cardsList.renderItems(cardsArray, userInfo._id);
+    addCardByUser(userInfo._id);
   })
   .catch((err) => {
     console.error(
