@@ -55,12 +55,7 @@ export class Card {
       this._setDeleteButton();
     }
 
-    this._liked = false;
-    if (this._cardLikesArray) {
-      this._cardLikesArray.forEach((item) => {
-        if (item._id === this._userId) this._liked = true;
-      });
-    }
+    this._liked = this._cardLikesArray ? this._cardLikesArray.some((like) => like._id === this._userId) : false;
 
     if (this._liked) {
       const cardIsLiked = this._cardElement.querySelector('.like__btn');

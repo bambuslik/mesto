@@ -133,17 +133,17 @@ function addCardByUser(userId) {
             };
             //set card id
             item._id = res._id;
-
             const card = newCard(item, userId);
             cardsList.addItem(card.generateCard(), false);
             addCardPopup.close();
-            formNewCardValidator.waitApiFinish(submitValue);
           })
           .catch((err) => {
-            formNewCardValidator.waitApiFinish(submitValue);
             console.error(
               err
             );
+          })
+          .finally(() => {
+            formNewCardValidator.waitApiFinish(submitValue);
           });
       }
     }
@@ -158,7 +158,7 @@ function addCardByUser(userId) {
 }
 
 //get user info from promises (api)
-const user = api.getUser()
+api.getUser()
   .then((userInfo) => {
     userNameElement.textContent = userInfo.name;
     userJobElement.textContent = userInfo.about;
@@ -211,27 +211,20 @@ const submitPopup = new PopupWithSubmit(
   '.popup_type_submit',
   {
     handleDeleteCard: () => {
-
       //lock submit
       submitPopup.lockSubmit();
-
       const cardId = submitPopup.getCardId();
       api.deleteCard(cardId)
         .then((res) => {
           cardPointer.closest('.element').remove();
-          submitPopup.close();
-
-          //unlock submit
-          submitPopup.unlockSubmit();
-
         })
         .catch((err) => {
           console.error(
             err
           );
+        })
+        .finally(() => {
           submitPopup.close();
-
-          //unlock submit
           submitPopup.unlockSubmit();
         });
     }
@@ -248,13 +241,14 @@ const editProfilePopup = new PopupWithForm(
         .then(() => {
           userInfo.setUserInfo(item.name, item.job);
           editProfilePopup.close();
-          formProfileValidator.waitApiFinish(submitValue);
         })
         .catch((err) => {
-          formProfileValidator.waitApiFinish(submitValue);
           console.error(
             err
           );
+        })
+        .finally(() => {
+          formProfileValidator.waitApiFinish(submitValue);
         });
     }
   }
@@ -279,13 +273,14 @@ const editAvatarPopup = new PopupWithForm(
         .then((res) => {
           editAvatarPopup.close();
           profileAvatarPopupOpenButton.style.backgroundImage = `url(${item.link})`;
-          formAvatarValidator.waitApiFinish(submitValue);
         })
         .catch((err) => {
-          formAvatarValidator.waitApiFinish(submitValue);
           console.error(
             err
           );
+        })
+        .finally(() => {
+          formAvatarValidator.waitApiFinish(submitValue);
         });
     }
   }

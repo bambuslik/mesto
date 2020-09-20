@@ -10,6 +10,7 @@ export default class PicturePopup extends Popup {
     const popupImg = document.querySelector('.popup__img');
     popupImg.src = data.src;
     popupImg.alt = data.alt;
-    document.querySelector('.popup__img-title').textContent = data.title;
+    const popupImgTitle = document.querySelector('.popup__img-title');
+    popupImgTitle.textContent = data.title;
   }
 }
